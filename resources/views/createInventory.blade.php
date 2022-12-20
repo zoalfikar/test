@@ -24,7 +24,7 @@
             @csrf
             <input type="hidden" name="_method" value="put" />
             <input type="text" name="product" value="{{$inventory->product->name}}">
-            <label for="quantity">{{$inventory->product->units->name}}</label> <input type="number" name="quantity"  value="{{$inventory->quantity}}">
+            <label for="quantity">{{$inventory->product->units->name}}</label> <input type="number" name="quantity" step="0.01" value="{{$inventory->quantity}}">
             <input type="submit" value="update">
         </form>
         <form action="{{url('inventories/'.$inventory->id)}}" method="post">
@@ -41,7 +41,7 @@
                    <option value="{{$product->id}}">{{$product->name}} :::: {{$product->units->name}} </option>
                 @endforeach
             </select>
-            <label for="quantity">quantity</label> <input type="number" name="quantity">
+            <label for="quantity">quantity</label> <input type="number" step="0.01" name="quantity">
             <input type="submit" value="submit">
         </form>
     @endif
