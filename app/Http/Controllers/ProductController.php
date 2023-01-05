@@ -65,7 +65,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view("createProduct")->with(["product"=>$product]);
+        $units = Unit::all();
+        return view("createProduct")->with(["product"=>$product,"units"=>$units]);
 
     }
 
