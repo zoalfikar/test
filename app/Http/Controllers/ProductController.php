@@ -69,7 +69,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $units = Unit::all();
-        $productImage = Image::where('o_id',$product->id)->first();
+        $productImage = Image::where('o_id',$product->id)->where('o_type',"product")->first();
         return view("createProduct")->with(["product"=>$product,"units"=>$units ,"productImage"=>$productImage]);
     }
 
@@ -104,7 +104,7 @@ class ProductController extends Controller
     {
         $product=Product::find($product->id);
         $product->delete();
-        $productImage = Image::where('o_id',$product->id)->first();
+        $productImage = Image::where('o_id',$product->id)->where('o_type',"product")->first();
         if ($productImage) {
             $productImage->delete();
         }

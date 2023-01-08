@@ -65,7 +65,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $userImage = Image::where('o_id',$user->id)->first();
+        $userImage = Image::where('o_id',$user->id)->where('o_type',"user")->first();
         return view("createUser")->with(["user"=>$user,"userImage"=>$userImage]);
     }
 
@@ -101,7 +101,7 @@ class UserController extends Controller
     {
         $user=User::find($user->id);
         $user->delete();
-        $userImage = Image::where('o_id',$user->id)->first();
+        $userImage = Image::where('o_id',$user->id)->where('o_type',"user")->first();
         if ($userImage) {
             $userImage->delete();
         }
