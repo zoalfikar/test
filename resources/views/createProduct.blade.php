@@ -30,6 +30,15 @@
                    <option value="{{$unit->id}}">{{$unit->name}}</option>
                 @endforeach
             </select>
+            @if($productImage)
+                <input type="hidden" name="imageId" value="{{$productImage->id}}">
+
+                <label for="path">image path</label> 
+                <input type="text" name="path" value="{{$productImage->path}}">
+
+                <label for="description">image description</label> 
+                <input type="text" name="description" value="{{$productImage->description}}">
+            @endif
             <input type="submit" value="update">
         </form>
         <form action="{{url('products/'.$product->id)}}" method="post">

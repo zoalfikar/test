@@ -24,8 +24,19 @@
             @csrf
             <input type="hidden" name="_method" value="put" />
             <label for="name">name</label> <input type="text" name="name"  value="{{$user->name}}">
+
             <label for="email">email</label> <input type="text" name="email"  value="{{$user->email}}">
+
             <label for="password">password</label> <input type="password" name="password"  value="{{$user->password}}">
+            @if($userImage)
+                <input type="hidden" name="imageId" value="{{$userImage->id}}">
+
+                <label for="path">image path</label> 
+                <input type="text" name="path" value="{{$userImage->path}}">
+
+                <label for="description">image description</label> 
+                <input type="text" name="description" value="{{$userImage->description}}">
+            @endif
             <input type="submit" value="submit">
         </form>
         <form action="{{url('users/'.$user->id)}}" method="post">

@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Unit;
+use App\Models\Image;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ImageController;
+
 
 class ProductController extends Controller
 {
@@ -66,8 +69,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $units = Unit::all();
-        return view("createProduct")->with(["product"=>$product,"units"=>$units]);
-
+        $productImage = Image::where('o_id',$product->id)->first();
+        return view("createProduct")->with(["product"=>$product,"units"=>$units ,"productImage"=>$productImage]);
     }
 
     /**
@@ -83,6 +86,9 @@ class ProductController extends Controller
         $updatedProduct->name = $request->name;
         $updatedProduct->unit_id = $request->unit_id;
         $updatedProduct->save();
+        $imageUpdater = new ImageController ;
+        $image = Image::find($request->imageId);
+        $imageUpdater->update($request,$image);
         return "product updated successfully" ;
     }
 
@@ -96,6 +102,8 @@ class ProductController extends Controller
     {
         $product=Product::find($product->id);
         $product->delete();
+        $productImage = Image::where('o_id',$product->id)->first();
+        $productImage->delete();
         return "product deleted successfully" ;
     }
 }

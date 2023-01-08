@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Image;
+use App\Http\Controllers\ImageController;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -63,7 +65,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view("createUser")->with(["user"=>$user]);
+        $userImage = Image::where('o_id',$user->id)->first();
+        return view("createUser")->with(["user"=>$user,"userImage"=>$userImage]);
     }
 
     /**
@@ -80,6 +83,9 @@ class UserController extends Controller
         $updatedUser->email = $request->email;
         $updatedUser->password = $request->password;
         $updatedUser->save();
+        $imageUpdater = new ImageController ;
+        $image = Image::find($request->imageId);
+        $imageUpdater->update($request,$image);
         return "user updated successfully" ;
     }
 
@@ -93,6 +99,8 @@ class UserController extends Controller
     {
         $user=User::find($user->id);
         $user->delete();
+        $userImage = Image::where('o_id',$user->id)->first();
+        $userImage->delete();
         return "user deleted successfully" ;
     }
 }
