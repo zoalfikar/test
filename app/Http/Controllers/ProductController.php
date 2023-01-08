@@ -88,7 +88,9 @@ class ProductController extends Controller
         $updatedProduct->save();
         $imageUpdater = new ImageController ;
         $image = Image::find($request->imageId);
-        $imageUpdater->update($request,$image);
+        if ($image) {
+            $imageUpdater->update($request,$image);
+        }
         return "product updated successfully" ;
     }
 
@@ -103,7 +105,9 @@ class ProductController extends Controller
         $product=Product::find($product->id);
         $product->delete();
         $productImage = Image::where('o_id',$product->id)->first();
-        $productImage->delete();
+        if ($productImage) {
+            $productImage->delete();
+        }
         return "product deleted successfully" ;
     }
 }

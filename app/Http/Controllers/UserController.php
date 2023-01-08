@@ -85,7 +85,9 @@ class UserController extends Controller
         $updatedUser->save();
         $imageUpdater = new ImageController ;
         $image = Image::find($request->imageId);
-        $imageUpdater->update($request,$image);
+        if ($image) {
+            $imageUpdater->update($request,$image);
+        }
         return "user updated successfully" ;
     }
 
@@ -100,7 +102,9 @@ class UserController extends Controller
         $user=User::find($user->id);
         $user->delete();
         $userImage = Image::where('o_id',$user->id)->first();
-        $userImage->delete();
+        if ($userImage) {
+            $userImage->delete();
+        }
         return "user deleted successfully" ;
     }
 }
