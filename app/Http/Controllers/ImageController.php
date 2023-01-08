@@ -94,4 +94,15 @@ class ImageController extends Controller
     {
         //
     }
+    public function createUserImage(Request $request)
+    {
+        $users = User::all();
+        return view('createimage.createUserImage')->with(["users"=>$users]);
+    }
+    
+    public function createProductImage(Request $request)
+    {
+        $products = Product::all();
+        return view('createimage.createProductImage')->with(["products"=>$products]);
+    }
 }

@@ -23,15 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/userImage', function () {
-    $users = User::all();
-    return view('createimage.createUserImage')->with(["users"=>$users]);
-});
-Route::get('/productImage', function () {
-    $products = Product::all();
-    return view('createimage.createProductImage')->with(["products"=>$products]);
-});
-
+Route::match(['get', 'post'], '/images/create/user-image', [ImageController::class ,'createUserImage']);
+Route::match(['get', 'post'], '/images/create/product-image', [ImageController::class,'createProductImage']);
 Route::resource('units', UnitController::class);
 Route::resource('products', ProductController::class);
 Route::resource('users', UserController::class);

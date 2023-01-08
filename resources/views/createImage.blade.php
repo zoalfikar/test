@@ -16,8 +16,8 @@
 </style>
 <body>
     <div class="options">
-        <a href="{{url('/userImage')}}">user image</a>
-        <a href="{{url('/productImage')}}">product image</a>
+        <a href="{{url('/images/create/user-image')}}">user image</a>
+        <a href="{{url('/images/create/product-image')}}">product image</a>
     </div>
 </body>
 </html>
