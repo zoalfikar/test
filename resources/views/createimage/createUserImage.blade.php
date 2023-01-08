@@ -39,5 +39,6 @@
             <input type="text" name="description">
 
             <input type="submit" value="submit">
-        </form></body>
+        </form>
+    </body>
 </html>

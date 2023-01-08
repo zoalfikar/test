@@ -19,13 +19,29 @@
     </style>
 </head>
 <body>
+@if(isset($user))
+        <form action="{{url('users/'.$user->id)}}" method="post">
+            @csrf
+            <input type="hidden" name="_method" value="put" />
+            <label for="name">name</label> <input type="text" name="name"  value="{{$user->name}}">
+            <label for="email">email</label> <input type="text" name="email"  value="{{$user->email}}">
+            <label for="password">password</label> <input type="password" name="password"  value="{{$user->password}}">
+            <input type="submit" value="submit">
+        </form>
+        <form action="{{url('users/'.$user->id)}}" method="post">
+            @csrf
+            <input type="hidden" name="_method" value="delete" />
+            <input type="submit" value="delete">
+        </form>
+    @else
         <form action="{{url('users')}}" method="post">
             @csrf
             <label for="name">name</label> <input type="text" name="name">
             <label for="email">email</label> <input type="text" name="email">
             <label for="password">password</label> <input type="password" name="password">
-            </select>
             <input type="submit" value="submit">
         </form>
+    @endif
+ 
 </body>
 </html>

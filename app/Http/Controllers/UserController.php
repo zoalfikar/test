@@ -61,9 +61,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view("createUser")->with(["user"=>$user]);
     }
 
     /**
@@ -73,9 +73,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $updatedUser = User::find($user->id);
+        $updatedUser->name = $request->name;
+        $updatedUser->email = $request->email;
+        $updatedUser->password = $request->password;
+        $updatedUser->save();
+        return "user updated successfully" ;
     }
 
     /**
@@ -84,8 +89,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user=User::find($user->id);
+        $user->delete();
+        return "user deleted successfully" ;
     }
 }

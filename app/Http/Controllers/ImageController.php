@@ -69,7 +69,8 @@ class ImageController extends Controller
      */
     public function edit(Image $image)
     {
-        //
+        return view("createImage")->with(["image"=>$image]);
+        
     }
 
     /**
@@ -81,7 +82,11 @@ class ImageController extends Controller
      */
     public function update(Request $request, Image $image)
     {
-        //
+        $updatedImage = Image::find($image->id);
+        $updatedImage->path = $request->path;
+        $updatedImage->description = $request->description;
+        $updatedImage->save();
+        return "image updated successfully" ;
     }
 
     /**
@@ -92,7 +97,9 @@ class ImageController extends Controller
      */
     public function destroy(Image $image)
     {
-        //
+        $image=Image::find($image->id);
+        $image->delete();
+        return "image deleted successfully" ;
     }
     public function createUserImage(Request $request)
     {
